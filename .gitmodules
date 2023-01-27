@@ -1,0 +1,3 @@
+[submodule "AdePT"]
+	path = AdePT
+	url = https://github.com/apt-sim/AdePT.git
