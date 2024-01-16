@@ -1,4 +1,4 @@
-# AdePT LLAMA examples for ACAT22
+# AdePT LLAMA examples for LLAMA PhD thesis
 
 This repository provides examples using [AdePT](https://github.com/apt-sim/AdePT)
 and [LLAMA](https://github.com/alpaka-group/llama)
@@ -26,7 +26,7 @@ The following data layouts can be tested directly:
 * AlignedSingleBlobSoA
 * MultiBlobSoA
 * AoSoAN (with arbitrary N)
-* Trace (although you will have more accurate results when using the example especially preparted for tracing)
+* FieldAccessCount (although you will have more accurate results when using the example especially preparted for tracing)
 * Heatmap (AoS)
 * Heatmap (AoSoA32)
 * Heatmap (PackedSingleBlobSoA)

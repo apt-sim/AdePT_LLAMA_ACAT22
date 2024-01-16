@@ -105,7 +105,7 @@ using Mapping = llama::mapping::AoS<llama::ArrayExtentsDynamic<std::size_t, 1>, 
 // using Mapping  = llama::mapping::AlignedSingleBlobSoA<llama::ArrayExtentsDynamic<std::size_t, 1>, Track>;
 // using Mapping  = llama::mapping::MultiBlobSoA<llama::ArrayExtentsDynamic<std::size_t, 1>, Track>;
 // using Mapping  = llama::mapping::AoSoA<llama::ArrayExtentsDynamic<std::size_t, 1>, Track, 16>; // try 16, 32, 64, etc.
-// using Mapping  = llama::mapping::Trace<llama::mapping::AoS<llama::ArrayExtentsDynamic<std::size_t, 1>, Track>,
+// using Mapping  = llama::mapping::FieldAccessCount<llama::mapping::AoS<llama::ArrayExtentsDynamic<std::size_t, 1>, Track>,
 // unsigned long long, true>;
 // using Mapping = llama::mapping::Heatmap<llama::mapping::AoS<llama::ArrayExtentsDynamic<std::size_t, 1>, Track>, 1,
 //                                        unsigned long long>;

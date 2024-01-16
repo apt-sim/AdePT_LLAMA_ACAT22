@@ -164,8 +164,8 @@ __global__ void ClearQueue(adept::MParray *queue)
 template <typename View>
 void reportHits(View tracks, cudaStream_t stream)
 {
-  if constexpr (llama::mapping::isTrace<typename View::Mapping>) {
-    std::byte *hitsArrayBlob = tracks.storageBlobs.back();
+  if constexpr (llama::mapping::isFieldAccessCount<typename View::Mapping>) {
+    std::byte *hitsArrayBlob = tracks.blobs().back();
     typename View::Mapping::FieldHitsArray hits;
     COPCORE_CUDA_CHECK(cudaMemcpy(&hits, hitsArrayBlob, sizeof(hits), cudaMemcpyDeviceToHost));
     tracks.mapping().printFieldHits(hits);
@@ -184,7 +184,7 @@ void printHeatmaps(View electrons, View positrons, View gammas)
       for (auto i = blobs.size() / 2; i < blobs.size(); i++) {
         const auto bs = view.mapping().blobSize(i);
         blobs[i].resize(bs);
-        COPCORE_CUDA_CHECK(cudaMemcpy(blobs[i].data(), view.storageBlobs[i], bs, cudaMemcpyDeviceToHost));
+        COPCORE_CUDA_CHECK(cudaMemcpy(blobs[i].data(), view.blobs()[i], bs, cudaMemcpyDeviceToHost));
       }
       const auto filename = "heatmap_" + name + ".bin";
       std::cout << "  " << filename << " ..." << std::endl;
@@ -546,7 +546,7 @@ void runGPU(int numParticles, double energy, int batch, const int *MCIndex_host,
     COPCORE_CUDA_CHECK(cudaStreamDestroy(interactionStreams[i]));
 
   for (int i = 0; i < ParticleType::NumParticleTypes; i++) {
-    for (auto *p : particles[i].tracks.storageBlobs)
+    for (auto *p : particles[i].tracks.blobs())
       COPCORE_CUDA_CHECK(cudaFree(p));
     COPCORE_CUDA_CHECK(cudaFree(particles[i].slotManager));
 
