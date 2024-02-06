@@ -58,7 +58,9 @@ __host__ __device__ inline void InitAsSecondary(SecondaryTrack &&track, const ve
   // A secondary inherits the position of its parent; the caller is responsible
   // to update the directions.
   track(Pos{})      = parentPos;
-  track(NavState{}) = parentNavState;
+  auto* dst = &track(NavState{});
+  auto* alignedDst = static_cast<vecgeom::NavStateIndex*>(__builtin_assume_aligned(dst, alignof(vecgeom::NavStateIndex)));
+  *alignedDst = parentNavState;
 }
 
 // Struct for communication between kernels

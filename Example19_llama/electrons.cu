@@ -69,7 +69,9 @@ static __device__ __forceinline__ void TransportElectrons(View electrons, const 
       currentTrack(Energy{})   = energy;
       currentTrack(Pos{})      = pos;
       currentTrack(Dir{})      = dir;
-      currentTrack(NavState{}) = navState;
+      auto* dst = &currentTrack(NavState{});
+      auto* alignedDst = static_cast<vecgeom::NavStateIndex*>(__builtin_assume_aligned(dst, alignof(vecgeom::NavStateIndex)));
+      *alignedDst = navState;
       if (push) activeQueue->push_back(globalSlot);
     };
 

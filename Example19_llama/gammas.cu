@@ -44,7 +44,9 @@ __global__ void TransportGammas(View gammas, const adept::MParray *active, Secon
 
     auto survive = [&](bool push = true) {
       currentTrack(Pos{})      = pos;
-      currentTrack(NavState{}) = navState;
+      auto* dst = &currentTrack(NavState{});
+      auto* alignedDst = static_cast<vecgeom::NavStateIndex*>(__builtin_assume_aligned(dst, alignof(vecgeom::NavStateIndex)));
+      *alignedDst = navState;
       if (push) activeQueue->push_back(slot);
     };
 

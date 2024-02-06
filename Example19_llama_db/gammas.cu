@@ -43,7 +43,9 @@ __global__ void TransportGammas(View gammas, const ParticleCount *gammasCount, S
     auto survive = [&](bool push = true) {
       auto writeBack = [&](auto &&track) {
         track(Pos{})      = pos;
-        track(NavState{}) = navState;
+        auto* dst = &track(NavState{});
+        auto* alignedDst = static_cast<vecgeom::NavStateIndex*>(__builtin_assume_aligned(dst, alignof(vecgeom::NavStateIndex)));
+        *alignedDst = navState;
       };
       if (push) {
         // copy track to memory for next iteration
