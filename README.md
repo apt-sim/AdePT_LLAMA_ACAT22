@@ -1,9 +1,13 @@
 # AdePT LLAMA examples for LLAMA PhD thesis
 
+**Warning: this branch is the LLAMA PhD thesis version. For the ACAT22 version, switch to branch `main`.**
+
 This repository provides examples using [AdePT](https://github.com/apt-sim/AdePT)
 and [LLAMA](https://github.com/alpaka-group/llama)
 which provided the basis for our contribution to the [ACAT22](https://indico.cern.ch/event/1106990/) workshop.
 The slides of our talk are available [here](https://indico.cern.ch/event/1106990/contributions/4991259/).
+The codebase on this branch has been updated after ACAT22, reevaluated and included in the PhD thesis of Bernhard Manfred Gruber,
+titled "Design of a data layout and memory access abstraction layer for heterogeneous architectures".
 
 This repository offers 4 additional examples for AdePT.
 All of them are derived from the original Example19, but the track array is managed by LLAMA.
